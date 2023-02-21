@@ -29,5 +29,6 @@ constexpr uint8_t PATTERN_MAX_LENGTH = 8;
 constexpr uint32_t PATTERN_ERR_BLINK_DELAY_MS = 500;
 
 constexpr uint8_t RELAYS_COUNT = 4;
+constexpr uint32_t RELAY_OPEN_TIME_MS = 15000;
 
 constexpr uint32_t WDT_IRQ_NUMBER = 6;

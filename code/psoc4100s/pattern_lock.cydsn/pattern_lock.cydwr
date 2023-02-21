@@ -28,7 +28,8 @@
       <Data key="8c8734ef-3644-4eed-bc55-360072b94fff/9613317f-9767-4872-a15a-e07325d93413" value="SPI_ss0_m" />
       <Data key="8c8734ef-3644-4eed-bc55-360072b94fff/ed092b9b-d398-4703-be89-cebf998501f6" value="SPI_mosi_m" />
       <Data key="8ff53d0b-49da-413b-ae01-0a9554e58ad3" value="relay_2" />
-      <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="UART_1_tx" />
+      <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="UART_tx" />
+      <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4" value="UART_rx" />
       <Data key="66b8cc62-dd96-4c5a-a587-6969e9f1b8b5" value="pattern_5" />
       <Data key="7244a15d-489d-4956-a59d-9e975ffa6815/7850aeaf-db25-4eae-b828-015ef596b59e" value="CapSense_Cmod" />
       <Data key="7244a15d-489d-4956-a59d-9e975ffa6815/77715107-f8d5-47e5-a629-0fb83101ac6b" value="CapSense_Sns" />
@@ -1946,6 +1947,11 @@
     <Group key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/23b8206d-1c77-4e61-be4a-b4037d5de5fc">
       <Group key="0">
         <Data key="Port Format" value="0,5" />
+      </Group>
+    </Group>
+    <Group key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4">
+      <Group key="0">
+        <Data key="Port Format" value="0,4" />
       </Group>
     </Group>
     <Group key="66b8cc62-dd96-4c5a-a587-6969e9f1b8b5">

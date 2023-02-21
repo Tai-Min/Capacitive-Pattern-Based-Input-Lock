@@ -24,6 +24,7 @@ enum class PatternShape {
 
 using PatternBuffer = PatternShape(&)[PATTERN_MAX_LENGTH];
 
+bool isFull();
 bool insertSymbol(PatternShape symbol);
 bool removeLastSymbol();
 void clear();

@@ -12,7 +12,7 @@ extern "C" {
 #include "pattern.hpp"
 #include "relays.hpp"
 #include "helpers.hpp"
-
+#include "serial.hpp"
 
 //#define PRINT_PATTERN
 
@@ -53,8 +53,6 @@ namespace {
 
 int main()
 {
-    
-
     CyGlobalIntEnable;
 
     registerCallbacks();
@@ -65,6 +63,8 @@ int main()
     
     while (true)
     {
+        serial::update();
+        
         if (appState == AppState::STANDBY)
         {
             uint8_t w = CapSense_PROXIMITY_WDGT_ID;
@@ -103,6 +103,8 @@ void registerCallbacks()
     touchpadTimer.cb = handleTouchpadActivityTimeout;
     cancelTimer.cb = handleCancelBtnHoldTimeout;
     patternBlinkTimer.cb = handlePatternBlinkTimeout;
+    
+    serial::setRelayCodeCallback(relays::setRelayCode);
 }
 
 void registerTimers()
@@ -123,13 +125,9 @@ void registerTimers()
 void hardwareInit()
 {
     watchdog::init();
-    
-    UART_Start();
-    
-    EZI2C_Start();
-    EZI2C_EzI2CSetBuffer1(sizeof(CapSense_dsRam), sizeof(CapSense_dsRam), (uint8*)&CapSense_dsRam);
-    
+    serial::init();
     capsense::start();
+    relays::init();
 }
 
 void readSensors(const uint8_t *selectedWidgets, uint8_t numSelectedWidgets)
@@ -194,6 +192,10 @@ void handleTouchpadStateChange(capsense::TouchpadState state)
     }
     else if(state == capsense::TouchpadState::STOPPED_TOUCH)
     {
+        if(pattern::isFull())
+        {
+            capsense::clearTouchpad();
+        }
         timing::restart(touchpadTimer);
         DBG("Stopped touch!");
     } 
@@ -207,8 +209,10 @@ void handleAcceptBtnStateChange(capsense::ButtonState state)
     }
     else if(state == capsense::ButtonState::RELEASED)
     {
-        if(capsense::isTouchpadClear())
+        if(capsense::isTouchpadClear() || pattern::isFull())
         {
+            pattern::insertSymbol(pattern::PatternShape::TERMINATOR); 
+            
             if (!relays::matchPatternAndOpen(pattern::getPatternBuf()))
             {
                 pattern::blinkErrSignalAndClearPattern();
@@ -229,18 +233,19 @@ void handleAcceptBtnStateChange(capsense::ButtonState state)
                 {
                     if(capsense::getPixelValue(x, y))
                     {
-                        UART_UartPutString("X");
+                        serial::send("X");
                     }
                     else
                     {
-                        UART_UartPutString("O");
+                        serial::send("O");
                     }
-                    
                 }
+                //serial::send("\r\n");
             }
-            UART_UartPutString("\r\n");
+            serial::send("\r\n");
 #endif
             pattern::PatternShape shape = pattern::classify(capsense::getTouchpadBuf());
+            //pattern::PatternShape shape = pattern::PatternShape::X;
             //pattern::PatternShape shape = pattern::classify(buf);
             switch(shape)
             {
@@ -304,6 +309,7 @@ void handleProximityActivityTimeout()
     }
     
     pattern::clear();
+    capsense::clearTouchpad();
     DBG("Proximity timeout!");
     INFO("No presence detected for a period of time, slowing down app to STANDBY");
     printAppState();
@@ -318,6 +324,7 @@ void handleTouchpadActivityTimeout()
     
     DBG("Touchpad timeout!");
     INFO("Touchpad inactive for a period of time, slowing down app to NORMAL");
+    capsense::clearTouchpad();
     printAppState();
 }
 
@@ -331,7 +338,7 @@ void handleCancelBtnHoldTimeout()
 
 void handlePatternBlinkTimeout()
 {
-    pattern::updatePatternBlinker(!capsense::isTouchpadClear());
+    pattern::updatePatternBlinker(!capsense::isTouchpadClear() && !pattern::isFull());
     timing::restart(patternBlinkTimer);
     //DBG("Patter blink updated!");
 }

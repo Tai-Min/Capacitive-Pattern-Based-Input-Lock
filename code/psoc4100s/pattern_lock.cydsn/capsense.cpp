@@ -55,6 +55,9 @@ void start()
 {
     CapSense_Start();
     CapSense_ISR_Disable();
+    
+    EZI2C_Start();
+    EZI2C_EzI2CSetBuffer1(sizeof(CapSense_dsRam), sizeof(CapSense_dsRam), (uint8*)&CapSense_dsRam);
 }
 
 void selectWidget(uint32_t widget)
@@ -109,7 +112,7 @@ const TouchpadBuffer getTouchpadBuf()
 
 bool getPixelValue(uint8_t x, uint8_t y)
 {
-    uint16_t bitToSet = y * (CAPSENSE_NUM_COLS - 1) + x;
+    uint16_t bitToSet = y * CAPSENSE_NUM_COLS + x;
         
     uint8_t arrIdx = bitToSet / 8;
     uint8_t shift = bitToSet % 8;
@@ -233,13 +236,14 @@ void setTouchpadState(bool state)
         x /= CAPSENSE_COLS_DIVIDER; // Yields value between 0 and CAPSENSE_NUM_COLS - 1
         
         uint16_t y = HI16(coords);
+        y = 100 - y;
         if(y >= 100)
         {
             y = 99;
         }
         y /= CAPSENSE_ROWS_DIVIDER; // Yields value between 0 and CAPSENSE_NUM_ROWS - 1
         
-        uint16_t bitToSet = y * (CAPSENSE_NUM_COLS - 1) + x;
+        uint16_t bitToSet = y * CAPSENSE_NUM_COLS + x;
         
         uint8_t arrIdx = bitToSet / 8;
         uint8_t shift = bitToSet % 8;

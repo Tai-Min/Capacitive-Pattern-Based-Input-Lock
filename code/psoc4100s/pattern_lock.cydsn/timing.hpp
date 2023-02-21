@@ -15,7 +15,7 @@ struct Timer {
     uint32_t timerThreshold = 0;
     bool _isRunning = false;
     uint32_t _timerVal = 0;
-    TimeoutCallback cb= nullptr;
+    TimeoutCallback cb = nullptr;
 };
 
 bool add(Timer &t);

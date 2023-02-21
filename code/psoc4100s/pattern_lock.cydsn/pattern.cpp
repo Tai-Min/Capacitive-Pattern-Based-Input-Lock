@@ -12,6 +12,7 @@ extern "C" {
 #include "ssie.hpp"
 
 namespace pattern {
+bool isFull();
 bool insertSymbol(PatternShape symbol);
 bool removeLastSymbol();
 void clear();
@@ -29,6 +30,11 @@ namespace {
     uint8_t patternCount = 0;
     PatternShape patternBuf[PATTERN_MAX_LENGTH] = {PatternShape::TERMINATOR};
 };
+
+bool isFull()
+{
+    return (patternCount >= PATTERN_MAX_LENGTH);
+}
 
 bool insertSymbol(PatternShape symbol)
 {

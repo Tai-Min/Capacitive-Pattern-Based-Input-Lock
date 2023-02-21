@@ -11,14 +11,8 @@ extern "C" {
 #include "pattern.hpp"
 
 namespace relays {
-enum class Relays {
-    RELAY_1 = 0,
-    RELAY_2,
-    RELAY_3,
-    RELAY_4,
-    NONE
-};
-
+void init();
+bool setRelayCode(uint8_t relay, const pattern::PatternBuffer buf);
 bool matchPatternAndOpen(const pattern::PatternBuffer buf);
 void closeAll();
 };

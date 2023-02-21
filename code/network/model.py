@@ -10,19 +10,24 @@ from tensorflow.keras import layers
 from model_exporter import (generate_ssie_model, toEnumActivation,
                             toEnumOperation)
 
+from collector import sampleToBinary, binaryToSample
+
 QUANTIZE = False
 
 EPOCHS = 100
-BATCH_SIZE = 1
+BATCH_SIZE = 10
 TEST_SPLIT = 0.2
 INITIAL_LR = 0.005
 DECAY_STEPS = 300
 SGD_MOMENTUM = 0.99
-AUGMENT_STRENGTH = 0.05
+AUGMENT_CHANCE = 0.15
 
 NUM_INPUTS = 50
 CLASSES = ["X", "triangle", "heart", "circle",  "square"]
 NUM_CLASSES = len(CLASSES)
+
+IMG_WIDTH = 20
+IMG_HEIGHT = 20
 
 model = keras.Sequential(
     [
@@ -38,16 +43,29 @@ optimizer = keras.optimizers.SGD(learning_rate=lr, momentum=SGD_MOMENTUM)
 
 
 def augment_sample(sample):
-    for i in range(len(sample)):
+    # Just add randomly bit next to other bit in the image
+    binary = sampleToBinary(sample)
+    col_cntr = 0
+    skip = False
 
-        op = -1.0 if bool(random.getrandbits(1)) else 1.0
-        sample[i] = float(sample[i]) + op * float(sample[i]) * AUGMENT_STRENGTH
+    for i in range(len(binary)):
+        if binary[i] and col_cntr and col_cntr < (IMG_WIDTH - 1) and not skip and (i < len(binary) - 1):
+            if random.uniform(0.0, 1.0) > AUGMENT_CHANCE:
+                continue
 
-        if sample[i] < 0.0:
-            sample[i] = 0.0
-        elif sample[i] > 255.0:
-            sample[i] = 255.0
+            side = -1 if bool(random.getrandbits(1)) else 1
+            if side == 1:
+                skip = True
 
+            binary[i + side] = 0.0 if binary[i + side] else 1.0
+        else:
+            skip = False
+
+        col_cntr += 1
+        if col_cntr >= IMG_WIDTH:
+            col_cntr = 0
+
+    sample = binaryToSample(binary)
     return sample
 
 
@@ -66,7 +84,7 @@ def load_sample(sample):
         reader = csv.reader(csvfile, delimiter=',')
         next(reader)
         data = next(reader)
-        data = augment_sample(data)
+        #data = augment_sample(data)
         data = np.array(data, dtype="float") / 255.0
         return (data, label)
 

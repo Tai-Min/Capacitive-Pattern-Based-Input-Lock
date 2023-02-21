@@ -10,6 +10,7 @@ extern "C" {
 
 #include "conf.hpp"
 #include "wdt.hpp"
+#include "helpers.hpp"
 
 namespace timing {
 bool add(Timer &t);
@@ -69,9 +70,9 @@ void doSleep(uint32_t delayMs, bool deep)
         CySysPmSleep();
     }
     
-    
     watchdog::clearInterrupt();
     update(delayMs);
+    
 }
 
 namespace {
@@ -85,9 +86,11 @@ void update(uint32_t timePassedMs)
         }
         
         timers[i]->_timerVal += timePassedMs;
+            
         if (timers[i]->_isRunning && timers[i]->_timerVal > timers[i]->timerThreshold)
         {
             stop(*timers[i]);
+            
             if(timers[i]->cb)
             {   
                 timers[i]->cb();

@@ -11,7 +11,7 @@ extern "C" {
 namespace helpers {
 void writeVal(int val);
 
-void writeVal(int32_t val)
+void writeVal(int val)
 {
     uint8_t buf[11] = {0};
     
@@ -45,9 +45,9 @@ void writeVal(int32_t val)
         buf[idxCntr++] = digitInt + '0'; // To ASCII.
     }
 
-    for(int i = idxCntr - 1; i >= 0; i--)
+    for(int i = 0; i < idxCntr; i++)
     {
-        UART_tx_Write(buf[i]);
+        serial::sendChar(buf[i]);
     }
 }
 };

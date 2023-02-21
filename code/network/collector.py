@@ -8,7 +8,7 @@ from matplotlib.animation import FuncAnimation
 
 # EDIT AS DESIRED
 
-label = "heart"
+label = "square"
 
 img_width = 20
 img_height = 20
@@ -19,20 +19,30 @@ port = "COM4"
 bits_in_byte = 8
 num_bytes = img_width * img_height // bits_in_byte
 
-fig = plt.figure()
-
 def charactersToBinary(reading):
     return [1.0 if r == 'X' else 0.0 for r in reading]
 
-def toSample(reading):
-    sample = [0 for i in range(num_bytes)]
+def binaryToSample(reading):
+    sample = [0] * num_bytes
 
     cntr = 0
-    for i in range(len(sample)):
+    for i in range(num_bytes):
         for shift in range(bits_in_byte):
             sample[i] |= ((int(reading[cntr]) << shift))
             cntr += 1
     return sample
+
+def sampleToBinary(sample):
+    res = [0] * img_height * img_width
+
+    for x in range(img_width):
+        for y in range(img_height):
+            bit_to_set = int(y * img_width + x)
+            arr_idx = int(bit_to_set / 8)
+            shift = int(bit_to_set % 8)
+            if int(sample[arr_idx]) & (1 << shift):
+                res[bit_to_set] = 1.0
+    return res
 
 def find_available_filename():
     fname = "./dataset/" + label + "." + str(find_available_filename.cntr) + ".csv"
@@ -59,9 +69,15 @@ def update(frame):
     reading = charactersToBinary(reading)
 
     if len(reading) == img_height * img_width:
-        parsedSamlpe = toSample(reading)
+        parsedSamlpe = binaryToSample(reading)
         print(parsedSamlpe)
+
+        #reading = sampleToBinary(parsedSamlpe)
+        #parsedSamlpe = binaryToSample(reading)
+        #print(parsedSamlpe)
+
         saveSample(parsedSamlpe)
+
         update.image = np.reshape(reading, ((img_height, img_width)))
     elif len(reading) != 0:
         update.image = np.zeros((img_height, img_width))
@@ -69,14 +85,17 @@ def update(frame):
     update.ax.clear()
     return update.ax.imshow(update.image)
 
-update.ser = serial.Serial()
-update.ser.baudrate = baud
-update.ser.port = port
-update.ser.timeout = 0.05
-update.ser.open()
-update.image = np.zeros((img_height, img_width))
-update.ax = fig.gca()
-update.img = update.ax.imshow(update.image)
+if __name__ == "__main__":
+    fig = plt.figure()
 
-animation = FuncAnimation(fig, update, interval=100)
-plt.show()
+    update.ser = serial.Serial()
+    update.ser.baudrate = baud
+    update.ser.port = port
+    update.ser.timeout = 0.05
+    update.ser.open()
+    update.image = np.zeros((img_height, img_width))
+    update.ax = fig.gca()
+    update.img = update.ax.imshow(update.image)
+
+    animation = FuncAnimation(fig, update, interval=100)
+    plt.show()

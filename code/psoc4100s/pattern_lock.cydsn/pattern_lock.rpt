@@ -1,12 +1,12 @@
-Loading plugins phase: Elapsed time ==> 0s.152ms
+Loading plugins phase: Elapsed time ==> 0s.162ms
 <CYPRESSTAG name="CyDsfit arguments...">
 cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p E:\touch_panel\code\psoc4100s\pattern_lock.cydsn\pattern_lock.cyprj -d CY8C4146AZI-S433 -s E:\touch_panel\code\psoc4100s\pattern_lock.cydsn\Generated_Source\PSoC4 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE</CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 0s.916ms
+Elaboration phase: Elapsed time ==> 0s.978ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.034ms
+HDL generation phase: Elapsed time ==> 0s.030ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -40,7 +40,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=E:\touch_panel
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Fri Feb 17 11:26:22 2023
+Tue Feb 21 02:32:50 2023
 
 
 ======================================================================
@@ -50,7 +50,7 @@ Options  :    -yv2 -q10 pattern_lock.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Fri Feb 17 11:26:22 2023
+Tue Feb 21 02:32:50 2023
 
 Flattening file 'D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v'
 Flattening file 'D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\ZeroTerminal\ZeroTerminal.v'
@@ -83,7 +83,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=E:\touch_panel
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Fri Feb 17 11:26:22 2023
+Tue Feb 21 02:32:50 2023
 
 Linking 'D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -111,7 +111,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=E:\touch_panel
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Fri Feb 17 11:26:22 2023
+Tue Feb 21 02:32:50 2023
 
 Linking 'D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -217,11 +217,11 @@ Aliasing \EZI2C:tmpOE__sda_net_0\ to tmpOE__pattern_data_net_0
 Aliasing \EZI2C:tmpOE__scl_net_0\ to tmpOE__pattern_data_net_0
 Aliasing \EZI2C:cts_wire\ to zero
 Aliasing \UART:select_s_wire\ to zero
-Aliasing \UART:rx_wire\ to zero
 Aliasing \UART:sclk_s_wire\ to zero
 Aliasing \UART:mosi_s_wire\ to zero
 Aliasing \UART:miso_m_wire\ to zero
 Aliasing \UART:tmpOE__tx_net_0\ to tmpOE__pattern_data_net_0
+Aliasing \UART:tmpOE__rx_net_0\ to tmpOE__pattern_data_net_0
 Aliasing \UART:cts_wire\ to zero
 Removing Lhs of wire one[6] = tmpOE__pattern_data_net_0[1]
 Removing Lhs of wire tmpOE__pattern_clk_net_0[9] = tmpOE__pattern_data_net_0[1]
@@ -271,16 +271,17 @@ Removing Lhs of wire \EZI2C:tmpOE__sda_net_0\[197] = tmpOE__pattern_data_net_0[1
 Removing Lhs of wire \EZI2C:tmpOE__scl_net_0\[203] = tmpOE__pattern_data_net_0[1]
 Removing Lhs of wire \EZI2C:cts_wire\[212] = zero[2]
 Removing Lhs of wire \UART:select_s_wire\[237] = zero[2]
-Removing Lhs of wire \UART:rx_wire\[238] = zero[2]
-Removing Lhs of wire \UART:Net_1170\[241] = \UART:Net_847\[236]
-Removing Lhs of wire \UART:sclk_s_wire\[242] = zero[2]
-Removing Lhs of wire \UART:mosi_s_wire\[243] = zero[2]
-Removing Lhs of wire \UART:miso_m_wire\[244] = zero[2]
-Removing Lhs of wire \UART:tmpOE__tx_net_0\[246] = tmpOE__pattern_data_net_0[1]
-Removing Lhs of wire \UART:cts_wire\[254] = zero[2]
+Removing Rhs of wire \UART:rx_wire\[238] = \UART:Net_1268\[239]
+Removing Lhs of wire \UART:Net_1170\[242] = \UART:Net_847\[236]
+Removing Lhs of wire \UART:sclk_s_wire\[243] = zero[2]
+Removing Lhs of wire \UART:mosi_s_wire\[244] = zero[2]
+Removing Lhs of wire \UART:miso_m_wire\[245] = zero[2]
+Removing Lhs of wire \UART:tmpOE__tx_net_0\[247] = tmpOE__pattern_data_net_0[1]
+Removing Lhs of wire \UART:tmpOE__rx_net_0\[258] = tmpOE__pattern_data_net_0[1]
+Removing Lhs of wire \UART:cts_wire\[262] = zero[2]
 
 ------------------------------------------------------
-Aliased 0 equations, 55 wires.
+Aliased 0 equations, 56 wires.
 ------------------------------------------------------
 
 ----------------------------------------------------------
@@ -304,14 +305,14 @@ CYPRESS_DIR    : D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Cre
 Warp Program   : D:\Programy\Programowanie\CPP\Cypress\PSoC Creator\4.0\PSoC Creator\warp\bin\warp.exe
 Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=E:\touch_panel\code\psoc4100s\pattern_lock.cydsn\pattern_lock.cyprj -dcpsoc3 pattern_lock.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 0s.255ms
+Warp synthesis phase: Elapsed time ==> 0s.279ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.0.0.432, Family: PSoC3, Started at: Friday, 17 February 2023 11:26:22
+cyp3fit: V4.0.0.432, Family: PSoC3, Started at: Tuesday, 21 February 2023 02:32:50
 Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=E:\touch_panel\code\psoc4100s\pattern_lock.cydsn\pattern_lock.cyprj -d CY8C4146AZI-S433 pattern_lock.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.006ms
+Design parsing phase: Elapsed time ==> 0s.012ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -1512,6 +1513,46 @@ Design Equations
         Properties:
         {
         }
+
+    Pin : Name = \UART:rx(0)\
+        Attributes:
+            In Group/Port: True
+            In Sync Option: NOSYNC
+            Out Sync Option: AUTO
+            Interrupt generated: False
+            Interrupt mode: NONE
+            Drive mode: HI_Z_DIGITAL
+            VTrip: CMOS
+            Slew: FAST
+            Input Sync needed: False
+            Output Sync needed: False
+            SC shield enabled: False
+            POR State: ANY
+            LCD Mode: COMMON
+            Register Mode: RegComb
+            CaSense Mode: NEITHER
+            Treat as pin: True
+            Is OE Registered: False
+            Uses Analog: False
+            Can contain Digital: True
+            Is SIO: False
+            SIO Output Buf: NONREGULATED
+            SIO Input Buf: SINGLE_ENDED
+            SIO HiFreq: LOW
+            SIO Hyst: DISABLED
+            SIO Vtrip: MULTIPLIER_0_5
+            SIO Multiplier Index: 0
+            SIO RefSel: VCC_IO
+            Required Capabilitites: DIGITAL
+            Initial Value: 0
+            IO Voltage: 0
+        PORT MAP (
+            pa_out => \UART:rx(0)\__PA ,
+            fb => \UART:rx_wire\ ,
+            pad => \UART:rx(0)_PAD\ );
+        Properties:
+        {
+        }
     </CYPRESSTAG>
     <CYPRESSTAG name="Macrocell listing" icon="FILE_RPT_EQUATION">
     </CYPRESSTAG>
@@ -1552,6 +1593,15 @@ Design Equations
             int_type = "10"
             is_nmi = 0
         }
+
+    interrupt: Name =\UART:SCB_IRQ\
+        PORT MAP (
+            interrupt => Net_180 );
+        Properties:
+        {
+            int_type = "10"
+            is_nmi = 0
+        }
     </CYPRESSTAG>
 </CYPRESSTAG>
 <CYPRESSTAG name="Technology mapping summary" expanded>
@@ -1562,8 +1612,8 @@ Technology mapping summary
 
 Resource Type                 : Used : Free :  Max :  % Used
 ============================================================
-Interrupts                    :    2 :   18 :   20 : 10.00 %
-IO                            :   31 :    5 :   36 : 86.11 %
+Interrupts                    :    3 :   17 :   20 : 15.00 %
+IO                            :   32 :    4 :   36 : 88.89 %
 Segment LCD                   :    0 :    1 :    1 :  0.00 %
 CapSense                      :    1 :    0 :    1 : 100.00 %
 Die Temp                      :    0 :    1 :    1 :  0.00 %
@@ -1577,20 +1627,20 @@ SAR ADC                       :    0 :    1 :    1 :  0.00 %
 DAC                           :      :      :      :        
   7-bit IDAC                  :    2 :    0 :    2 : 100.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.008ms
-Tech Mapping phase: Elapsed time ==> 0s.014ms
+Technology Mapping: Elapsed time ==> 0s.006ms
+Tech Mapping phase: Elapsed time ==> 0s.012ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 <CYPRESSTAG name="Analog Placement">
-Elapsed time ==> 0.0662303s
+Elapsed time ==> 0.0715632s
 </CYPRESSTAG>
-Analog Placement phase: Elapsed time ==> 0s.124ms
+Analog Placement phase: Elapsed time ==> 0s.128ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
 <CYPRESSTAG name="Analog Routing">
-Route success=True, Iterations=1 Elapsed=0.0024762 secs
+Route success=True, Iterations=1 Elapsed=0.0034742 secs
 </CYPRESSTAG>
-Analog Routing phase: Elapsed time ==> 0s.002ms
+Analog Routing phase: Elapsed time ==> 0s.005ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Code Generation">
 ============ Analog Final Answer Routes ============
@@ -1617,10 +1667,10 @@ Map of net to items {
     p0_2
     P0_P43
     p0_3
-    P0_P41
-    p0_1
     P0_P46
     p0_6
+    P0_P41
+    p0_1
     P0_P40
     p0_0
     AMUX_PASS_CSD_SWITCH_A_SR
@@ -1639,18 +1689,18 @@ Map of net to items {
     p1_4
     P1_P47
     p1_7
-    P1_P41
-    p1_1
-    P1_P40
-    p1_0
     P2_P41
     p2_1
-    P1_P43
-    p1_3
+    P1_P40
+    p1_0
     P2_P40
     p2_0
     P1_P42
     p1_2
+    P1_P43
+    p1_3
+    P1_P41
+    p1_1
     P4_P41
     p4_1
     idac1_out
@@ -1676,10 +1726,10 @@ Map of item to net {
   p0_2                                             -> \CapSense:Net_2_0\
   P0_P43                                           -> \CapSense:Net_2_0\
   p0_3                                             -> \CapSense:Net_2_0\
-  P0_P41                                           -> \CapSense:Net_2_0\
-  p0_1                                             -> \CapSense:Net_2_0\
   P0_P46                                           -> \CapSense:Net_2_0\
   p0_6                                             -> \CapSense:Net_2_0\
+  P0_P41                                           -> \CapSense:Net_2_0\
+  p0_1                                             -> \CapSense:Net_2_0\
   P0_P40                                           -> \CapSense:Net_2_0\
   p0_0                                             -> \CapSense:Net_2_0\
   AMUX_PASS_CSD_SWITCH_A_SR                        -> \CapSense:Net_2_0\
@@ -1698,18 +1748,18 @@ Map of item to net {
   p1_4                                             -> \CapSense:Net_2_0\
   P1_P47                                           -> \CapSense:Net_2_0\
   p1_7                                             -> \CapSense:Net_2_0\
-  P1_P41                                           -> \CapSense:Net_2_0\
-  p1_1                                             -> \CapSense:Net_2_0\
-  P1_P40                                           -> \CapSense:Net_2_0\
-  p1_0                                             -> \CapSense:Net_2_0\
   P2_P41                                           -> \CapSense:Net_2_0\
   p2_1                                             -> \CapSense:Net_2_0\
-  P1_P43                                           -> \CapSense:Net_2_0\
-  p1_3                                             -> \CapSense:Net_2_0\
+  P1_P40                                           -> \CapSense:Net_2_0\
+  p1_0                                             -> \CapSense:Net_2_0\
   P2_P40                                           -> \CapSense:Net_2_0\
   p2_0                                             -> \CapSense:Net_2_0\
   P1_P42                                           -> \CapSense:Net_2_0\
   p1_2                                             -> \CapSense:Net_2_0\
+  P1_P43                                           -> \CapSense:Net_2_0\
+  p1_3                                             -> \CapSense:Net_2_0\
+  P1_P41                                           -> \CapSense:Net_2_0\
+  p1_1                                             -> \CapSense:Net_2_0\
   P4_P41                                           -> \CapSense:Net_2_0\
   p4_1                                             -> \CapSense:Net_2_0\
   idac1_out                                        -> \CapSense:Net_2_0\
@@ -1719,7 +1769,7 @@ Map of item to net {
 }
 Mux Info {
 }
-Analog Code Generation phase: Elapsed time ==> 0s.009ms
+Analog Code Generation phase: Elapsed time ==> 0s.008ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
@@ -1737,7 +1787,7 @@ PLD Packing: Elapsed time ==> 0s.000ms
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.006ms
+Partitioning: Elapsed time ==> 0s.007ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -1759,6 +1809,15 @@ Intr container @ [IntrContainer=(0)]:
     interrupt: Name =\EZI2C:SCB_IRQ\
         PORT MAP (
             interrupt => Net_39 );
+        Properties:
+        {
+            int_type = "10"
+            is_nmi = 0
+        }
+  Intr@ [IntrContainer=(0)][IntrId=(9)] 
+    interrupt: Name =\UART:SCB_IRQ\
+        PORT MAP (
+            interrupt => Net_180 );
         Properties:
         {
             int_type = "10"
@@ -1938,6 +1997,47 @@ Pin : Name = \CapSense:Sns(5)\
         pa_out => \CapSense:Sns(5)\__PA ,
         analog_term => \CapSense:Net_2_0\ ,
         pad => \CapSense:Sns(5)_PAD\ );
+    Properties:
+    {
+    }
+
+[IoId=4]: 
+Pin : Name = \UART:rx(0)\
+    Attributes:
+        In Group/Port: True
+        In Sync Option: NOSYNC
+        Out Sync Option: AUTO
+        Interrupt generated: False
+        Interrupt mode: NONE
+        Drive mode: HI_Z_DIGITAL
+        VTrip: CMOS
+        Slew: FAST
+        Input Sync needed: False
+        Output Sync needed: False
+        SC shield enabled: False
+        POR State: ANY
+        LCD Mode: COMMON
+        Register Mode: RegComb
+        CaSense Mode: NEITHER
+        Treat as pin: True
+        Is OE Registered: False
+        Uses Analog: False
+        Can contain Digital: True
+        Is SIO: False
+        SIO Output Buf: NONREGULATED
+        SIO Input Buf: SINGLE_ENDED
+        SIO HiFreq: LOW
+        SIO Hyst: DISABLED
+        SIO Vtrip: MULTIPLIER_0_5
+        SIO Multiplier Index: 0
+        SIO RefSel: VCC_IO
+        Required Capabilitites: DIGITAL
+        Initial Value: 0
+        IO Voltage: 0
+    PORT MAP (
+        pa_out => \UART:rx(0)\__PA ,
+        fb => \UART:rx_wire\ ,
+        pad => \UART:rx(0)_PAD\ );
     Properties:
     {
     }
@@ -3029,6 +3129,7 @@ Serial Communication (SCB) group 0:
         PORT MAP (
             clock => \UART:Net_847_ff1\ ,
             interrupt => Net_180 ,
+            rx => \UART:rx_wire\ ,
             tx => \UART:tx_wire\ ,
             rts => \UART:rts_wire\ ,
             mosi_m => \UART:mosi_m_wire\ ,
@@ -3143,6 +3244,7 @@ Port | Pin | Fixed |      Type |       Drive Mode |                 Name | Conne
      |   1 |     * |      NONE |      HI_Z_ANALOG |   \CapSense:Sns(15)\ | Analog(\CapSense:Net_2_0\)
      |   2 |     * |      NONE |      HI_Z_ANALOG |   \CapSense:Sns(14)\ | Analog(\CapSense:Net_2_0\)
      |   3 |     * |      NONE |      HI_Z_ANALOG |    \CapSense:Sns(5)\ | Analog(\CapSense:Net_2_0\)
+     |   4 |     * |      NONE |     HI_Z_DIGITAL |         \UART:rx(0)\ | FB(\UART:rx_wire\)
      |   5 |     * |      NONE |         CMOS_OUT |         \UART:tx(0)\ | In(\UART:tx_wire\)
      |   6 |     * |      NONE |      HI_Z_ANALOG |    \CapSense:Sns(6)\ | Analog(\CapSense:Net_2_0\)
      |   7 |     * |      NONE |         CMOS_OUT |       pattern_clk(0) | 
@@ -3176,19 +3278,19 @@ Port | Pin | Fixed |      Type |       Drive Mode |                 Name | Conne
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 0s.001ms
-Digital Placement phase: Elapsed time ==> 0s.072ms
+Digital component placer commit/Report: Elapsed time ==> 0s.000ms
+Digital Placement phase: Elapsed time ==> 0s.080ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 Info: pft.M0077: There is no timing information available for the selected device. Static timing checks will not be applied and digital routing will not be timing-driven. (App=cydsfit)
 Routing successful.
-Digital Routing phase: Elapsed time ==> 0s.111ms
+Digital Routing phase: Elapsed time ==> 0s.106ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 0s.067ms
+Bitstream Generation phase: Elapsed time ==> 0s.077ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
-Bitstream Verification phase: Elapsed time ==> 0s.001ms
+Bitstream Verification phase: Elapsed time ==> 0s.002ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 No timing parameter file available for CY8C4146AZI-S433
@@ -3198,11 +3300,11 @@ Static timing analysis phase: Elapsed time ==> 0s.001ms
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.093ms
+Design database save phase: Elapsed time ==> 0s.110ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 0s.538ms
+cydsfit: Elapsed time ==> 0s.587ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 0s.538ms
-API generation phase: Elapsed time ==> 1s.326ms
-Dependency generation phase: Elapsed time ==> 0s.009ms
+Fitter phase: Elapsed time ==> 0s.588ms
+API generation phase: Elapsed time ==> 1s.308ms
+Dependency generation phase: Elapsed time ==> 0s.008ms
 Cleanup phase: Elapsed time ==> 0s.000ms
