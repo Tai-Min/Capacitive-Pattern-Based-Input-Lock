@@ -8,12 +8,14 @@ from matplotlib.animation import FuncAnimation
 
 # EDIT AS DESIRED
 
-label = "square"
+label = "circle"
 
 img_width = 20
 img_height = 20
 baud = 115200
 port = "COM4"
+
+data_type = "buffer" # else "matrix"
 
 # DO NOT TOUCH BELOW
 bits_in_byte = 8
@@ -66,19 +68,30 @@ def update(frame):
     reading = update.ser.readline()
     reading = reading.decode("utf-8").strip()
 
-    reading = charactersToBinary(reading)
+    if data_type == "buffer" and reading:
+        reading = reading.split(",")
+        print(reading)
+        reading = [int(reading[i]) for i in range(len(reading) - 1)]
 
-    if len(reading) == img_height * img_width:
-        parsedSamlpe = binaryToSample(reading)
+        if len(reading) == num_bytes:
+            print("AA")
+
+        print(reading)
+
+        saveSample(reading)
+
+        reading = sampleToBinary(reading)
+        update.image = np.reshape(reading, ((img_height, img_width)))
+
+    elif data_type == "matrix" and len(reading) == img_height * img_width:
+        binary = charactersToBinary(reading)
+        parsedSamlpe = binaryToSample(binary)
         print(parsedSamlpe)
-
-        #reading = sampleToBinary(parsedSamlpe)
-        #parsedSamlpe = binaryToSample(reading)
-        #print(parsedSamlpe)
 
         saveSample(parsedSamlpe)
 
-        update.image = np.reshape(reading, ((img_height, img_width)))
+        update.image = np.reshape(binary, ((img_height, img_width)))
+
     elif len(reading) != 0:
         update.image = np.zeros((img_height, img_width))
 

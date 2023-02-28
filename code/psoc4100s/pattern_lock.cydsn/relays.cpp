@@ -56,8 +56,6 @@ void init()
             relays[i].buf[j] = pattern::PatternShape::TERMINATOR;
         }
     }
-    
-    relays[0].buf[0] = pattern::PatternShape::X;
 }
 
 bool setRelayCode(uint8_t relay, const pattern::PatternBuffer buf)

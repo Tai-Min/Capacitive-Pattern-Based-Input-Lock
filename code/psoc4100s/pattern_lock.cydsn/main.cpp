@@ -14,7 +14,10 @@ extern "C" {
 #include "helpers.hpp"
 #include "serial.hpp"
 
+//#define SKIP_ADD_PATTERN
+//#define PRINT_RAW_BUFFER
 //#define PRINT_PATTERN
+//#define PRINT_PATTERN_NEWLINE
 
 enum class AppState {
     STANDBY,
@@ -226,6 +229,14 @@ void handleAcceptBtnStateChange(capsense::ButtonState state)
         }
         else
         {
+#ifdef PRINT_RAW_BUFFER
+    for(uint8_t i = 0; i < CAPSENSE_BUFFER_SIZE; i++)
+    {
+        helpers::writeVal(capsense::getTouchpadBuf()[i]);
+        serial::send(", ");
+    }
+    serial::send("\r\n");
+#endif
 #ifdef PRINT_PATTERN
             for(int x = 0; x < CAPSENSE_NUM_COLS; x++)
             {
@@ -240,10 +251,13 @@ void handleAcceptBtnStateChange(capsense::ButtonState state)
                         serial::send("O");
                     }
                 }
-                //serial::send("\r\n");
+#ifdef PRINT_PATTERN_NEWLINE
+                serial::send("\r\n");
+#endif
             }
             serial::send("\r\n");
 #endif
+
             pattern::PatternShape shape = pattern::classify(capsense::getTouchpadBuf());
             //pattern::PatternShape shape = pattern::PatternShape::X;
             //pattern::PatternShape shape = pattern::classify(buf);
@@ -268,9 +282,12 @@ void handleAcceptBtnStateChange(capsense::ButtonState state)
                 DBG("Inserted: terminator???");
                 break;
             }
+#ifndef SKIP_ADD_PATTERN
             pattern::insertSymbol(shape); 
+#endif
             capsense::clearTouchpad();
             INFO("Shape inserted to buffer via accept button");
+
         }
         DBG("Accept released!");
     } 

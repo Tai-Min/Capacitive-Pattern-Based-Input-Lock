@@ -20,7 +20,7 @@ TEST_SPLIT = 0.2
 INITIAL_LR = 0.005
 DECAY_STEPS = 300
 SGD_MOMENTUM = 0.99
-AUGMENT_CHANCE = 0.15
+AUGMENT_CHANCE = 0.05
 
 NUM_INPUTS = 50
 CLASSES = ["X", "triangle", "heart", "circle",  "square"]
@@ -84,7 +84,7 @@ def load_sample(sample):
         reader = csv.reader(csvfile, delimiter=',')
         next(reader)
         data = next(reader)
-        #data = augment_sample(data)
+        data = augment_sample(data)
         data = np.array(data, dtype="float") / 255.0
         return (data, label)
 

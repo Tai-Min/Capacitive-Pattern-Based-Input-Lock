@@ -1,5 +1,6 @@
 import serial
 import numpy as np
+import time
 
 ser = serial.Serial()
 ser.port = "COM4"
@@ -13,11 +14,6 @@ HEART = 2
 CIRCLE = 3
 SQUARE = 4
 
-relay = 1
-pattern = [X]
-
-buf = [RELAY_SET_PATTERN_CMD, relay] + pattern 
-
 def crc(arr):
     sum1 = 0
     sum2 = 0
@@ -28,15 +24,22 @@ def crc(arr):
 
     return [sum2, sum1]
 
+def send_code(serial, relay, code):
+    buf = [RELAY_SET_PATTERN_CMD, relay] + code
+    buf += crc(buf)
+    buf = bytes(buf)
 
-buf += crc(buf)
-buf = bytes(buf)
-
-print(buf)
+    ser.write(buf)
+    res = ser.readline()
+    print(res)
 
 ser.open()
+delay = 0.05
 
-ser.write(buf)
-
-res = ser.readline()
-print(res)
+send_code(ser, 0, [X])
+time.sleep(delay)
+send_code(ser, 1, [X, HEART])
+time.sleep(delay)
+send_code(ser, 2, [HEART, TRIANGLE, SQUARE])
+time.sleep(delay)
+send_code(ser, 3, [CIRCLE, HEART])
