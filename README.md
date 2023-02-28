@@ -3,6 +3,8 @@
 Created for [Propel Human-Machine Interactions into the Future
 with Infineon](https://www.hackster.io/contests/capsense). For the detailed description of the project see [Capacitive Pattern Based Input Lock on Hackster.io](https://www.hackster.io/Tai-Min/capacitive-pattern-based-input-lock-50ced4)
 
+![Project's image](media/img.jpg)
+
 ## Folder structure
 * case - Simple stand made in FreeCAD (FCStd and STL files)
 * code
